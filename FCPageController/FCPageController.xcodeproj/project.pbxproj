@@ -13,6 +13,14 @@
 		19DC96FA2058B827003AD3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DC96F92058B827003AD3B2 /* Assets.xcassets */; };
 		19DC96FD2058B827003AD3B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DC96FB2058B827003AD3B2 /* LaunchScreen.storyboard */; };
 		19DC97002058B827003AD3B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC96FF2058B827003AD3B2 /* main.m */; };
+		19DC970A2058B9BB003AD3B2 /* FCPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97092058B9BB003AD3B2 /* FCPageController.m */; };
+		19DC970E2058B9EA003AD3B2 /* FCMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC970D2058B9EA003AD3B2 /* FCMenuView.m */; };
+		19DC97112058B9F2003AD3B2 /* FCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97102058B9F2003AD3B2 /* FCMenuItem.m */; };
+		19DC97132058BA0E003AD3B2 /* FCPageConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97122058BA0E003AD3B2 /* FCPageConst.m */; };
+		19DC971A2058C559003AD3B2 /* FCOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97192058C559003AD3B2 /* FCOneViewController.m */; };
+		19DC971D2058C565003AD3B2 /* FCTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC971C2058C565003AD3B2 /* FCTwoViewController.m */; };
+		19DC97202058C56C003AD3B2 /* FCThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC971F2058C56C003AD3B2 /* FCThreeViewController.m */; };
+		19DC97232058C76C003AD3B2 /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97222058C76C003AD3B2 /* FCViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,21 @@
 		19DC96FC2058B827003AD3B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19DC96FE2058B827003AD3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19DC96FF2058B827003AD3B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		19DC97082058B9BB003AD3B2 /* FCPageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCPageController.h; sourceTree = "<group>"; };
+		19DC97092058B9BB003AD3B2 /* FCPageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCPageController.m; sourceTree = "<group>"; };
+		19DC970C2058B9EA003AD3B2 /* FCMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCMenuView.h; sourceTree = "<group>"; };
+		19DC970D2058B9EA003AD3B2 /* FCMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCMenuView.m; sourceTree = "<group>"; };
+		19DC970F2058B9F2003AD3B2 /* FCMenuItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCMenuItem.h; sourceTree = "<group>"; };
+		19DC97102058B9F2003AD3B2 /* FCMenuItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCMenuItem.m; sourceTree = "<group>"; };
+		19DC97122058BA0E003AD3B2 /* FCPageConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCPageConst.m; sourceTree = "<group>"; };
+		19DC97182058C559003AD3B2 /* FCOneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCOneViewController.h; sourceTree = "<group>"; };
+		19DC97192058C559003AD3B2 /* FCOneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCOneViewController.m; sourceTree = "<group>"; };
+		19DC971B2058C565003AD3B2 /* FCTwoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCTwoViewController.h; sourceTree = "<group>"; };
+		19DC971C2058C565003AD3B2 /* FCTwoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCTwoViewController.m; sourceTree = "<group>"; };
+		19DC971E2058C56C003AD3B2 /* FCThreeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCThreeViewController.h; sourceTree = "<group>"; };
+		19DC971F2058C56C003AD3B2 /* FCThreeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCThreeViewController.m; sourceTree = "<group>"; };
+		19DC97212058C76C003AD3B2 /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
+		19DC97222058C76C003AD3B2 /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +81,8 @@
 		19DC96EF2058B827003AD3B2 /* FCPageController */ = {
 			isa = PBXGroup;
 			children = (
+				19DC97062058B99D003AD3B2 /* Core */,
+				19DC97142058C4C9003AD3B2 /* Controllers */,
 				19DC96F02058B827003AD3B2 /* AppDelegate.h */,
 				19DC96F12058B827003AD3B2 /* AppDelegate.m */,
 				19DC96F32058B827003AD3B2 /* ViewController.h */,
@@ -69,6 +94,51 @@
 				19DC96FF2058B827003AD3B2 /* main.m */,
 			);
 			path = FCPageController;
+			sourceTree = "<group>";
+		};
+		19DC97062058B99D003AD3B2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				19DC97072058B99D003AD3B2 /* FCPageController */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		19DC97072058B99D003AD3B2 /* FCPageController */ = {
+			isa = PBXGroup;
+			children = (
+				19DC970B2058B9DA003AD3B2 /* FCMenuView */,
+				19DC97082058B9BB003AD3B2 /* FCPageController.h */,
+				19DC97092058B9BB003AD3B2 /* FCPageController.m */,
+				19DC97122058BA0E003AD3B2 /* FCPageConst.m */,
+			);
+			path = FCPageController;
+			sourceTree = "<group>";
+		};
+		19DC970B2058B9DA003AD3B2 /* FCMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				19DC970C2058B9EA003AD3B2 /* FCMenuView.h */,
+				19DC970D2058B9EA003AD3B2 /* FCMenuView.m */,
+				19DC970F2058B9F2003AD3B2 /* FCMenuItem.h */,
+				19DC97102058B9F2003AD3B2 /* FCMenuItem.m */,
+			);
+			path = FCMenuView;
+			sourceTree = "<group>";
+		};
+		19DC97142058C4C9003AD3B2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				19DC97182058C559003AD3B2 /* FCOneViewController.h */,
+				19DC97192058C559003AD3B2 /* FCOneViewController.m */,
+				19DC971B2058C565003AD3B2 /* FCTwoViewController.h */,
+				19DC971C2058C565003AD3B2 /* FCTwoViewController.m */,
+				19DC971E2058C56C003AD3B2 /* FCThreeViewController.h */,
+				19DC971F2058C56C003AD3B2 /* FCThreeViewController.m */,
+				19DC97212058C76C003AD3B2 /* FCViewController.h */,
+				19DC97222058C76C003AD3B2 /* FCViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,8 +214,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				19DC96F52058B827003AD3B2 /* ViewController.m in Sources */,
+				19DC970E2058B9EA003AD3B2 /* FCMenuView.m in Sources */,
+				19DC97232058C76C003AD3B2 /* FCViewController.m in Sources */,
+				19DC97132058BA0E003AD3B2 /* FCPageConst.m in Sources */,
+				19DC97112058B9F2003AD3B2 /* FCMenuItem.m in Sources */,
 				19DC97002058B827003AD3B2 /* main.m in Sources */,
+				19DC971A2058C559003AD3B2 /* FCOneViewController.m in Sources */,
+				19DC97202058C56C003AD3B2 /* FCThreeViewController.m in Sources */,
+				19DC971D2058C565003AD3B2 /* FCTwoViewController.m in Sources */,
 				19DC96F22058B827003AD3B2 /* AppDelegate.m in Sources */,
+				19DC970A2058B9BB003AD3B2 /* FCPageController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AFVQ8GKPH;
 				INFOPLIST_FILE = FCPageController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fuchenxi.com.github.FCPageController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -296,6 +375,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AFVQ8GKPH;
 				INFOPLIST_FILE = FCPageController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fuchenxi.com.github.FCPageController;
 				PRODUCT_NAME = "$(TARGET_NAME)";

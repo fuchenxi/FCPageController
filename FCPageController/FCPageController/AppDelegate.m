@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "FCPageController.h"
+#import "FCOneViewController.h"
+#import "FCTwoViewController.h"
+#import "FCThreeViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +20,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor greenColor];
+    
+    FCPageController *pageVC = [[FCPageController alloc] initWithViewControllerClasses:@[[FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class], [FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class], [FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class]] andThierTitles:@[@"One", @"Two", @"Three", @"One", @"Two", @"Three", @"One", @"Two", @"Three"]];
+    pageVC.menuItemWidth = 80;
+    pageVC.pageAnimatable = YES;
+    
+    self.window.rootViewController = pageVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
