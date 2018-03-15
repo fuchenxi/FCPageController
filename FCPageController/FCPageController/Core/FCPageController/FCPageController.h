@@ -57,19 +57,29 @@
 @property(nonatomic, strong) UIColor *titleColorNormal;
 
 /**
- Custom menu view's height.
+ Customize menu view's height.
  */
 @property(nonatomic, assign) CGFloat menuHeight;
 
 /**
- Custom menu view item's height.
+ Customize menu view item's height.
  */
 @property(nonatomic, assign) CGFloat menuItemWidth;
 
 /**
- Custom the background color of the menu view.
+ Customize the background color of the menu view.
  */
 @property(nonatomic, strong) UIColor *menuBackgroundColor;
+
+/**
+ The array stores the width of each item, and the type is NSNumber.
+ */
+@property (nonatomic, strong) NSArray *itemsWidths;
+
+/**
+ The menu view progress style. Default is 'FCMenuViewStyleLine'.
+ */
+@property (nonatomic, assign) FCMenuViewStyle menuViewStyle;
 
 /**
  Initialize a pageController instance with the classes of the child controller and their title.

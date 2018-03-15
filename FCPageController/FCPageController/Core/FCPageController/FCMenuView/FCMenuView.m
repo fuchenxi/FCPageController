@@ -8,12 +8,15 @@
 
 #import "FCMenuView.h"
 #import "FCMenuItem.h"
+#import "FCProgressView.h"
 
 #define kFCMaskWidth 20
 #define kFCItemWidth 60
-#define kFCMargin    0
+#define kFCMenuMargin 0
 #define kFCTagGap    6250
 #define kFCBGColor [UIColor colorWithRed:172.0/255.0 green:165.0/255.0 blue:162.0/255.0 alpha:1.0]
+
+static CGFloat const FCProgressHeight = 2.0;
 
 @interface FCMenuView () <UIScrollViewDelegate, FCMenuItemDelegate> {
     
@@ -26,6 +29,10 @@
 @property(nonatomic, strong) UIScrollView *scrollView;
 
 @property(nonatomic, strong) FCMenuItem *selectedItem;
+
+@property(nonatomic, strong) FCProgressView *progressView;
+
+@property (nonatomic, strong) NSMutableArray *frames;
 
 @property(nonatomic, strong) UIColor *bgColor;
 
@@ -62,6 +69,9 @@
     [super willMoveToWindow:newWindow];
     [self configureScrollView];
     [self configureItems];
+    if (self.style == FCMenuViewStyleLine) {
+        [self configureProgressView];
+    }
 }
 
 - (void)configureScrollView {
@@ -81,7 +91,7 @@
 
 - (void)configureItems {
     
-    CGFloat contentWidth = kFCMargin;
+    CGFloat contentWidth = kFCMenuMargin;
     for (int i = 0; i < self.items.count; i++) {
         
         CGFloat itemWidth = kFCItemWidth;
@@ -89,6 +99,7 @@
             itemWidth = [self.delegate menuView:self widthForItemAtIndex:i];
         }
         CGRect frame = CGRectMake(contentWidth, 0, itemWidth, self.frame.size.height);
+        [self.frames addObject:[NSValue valueWithCGRect:frame]];
         contentWidth += itemWidth;
         FCMenuItem *item = [[FCMenuItem alloc] initWithFrame:frame];
         item.tag = kFCTagGap + i;
@@ -113,14 +124,31 @@
         }
         [self.scrollView addSubview:item];
     }
-    contentWidth += kFCMargin;
+    contentWidth += kFCMenuMargin;
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
+}
+
+- (void)configureProgressView {
+    
+    self.progressView = ({
+        
+        FCProgressView *progressView = [[FCProgressView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - FCProgressHeight, self.scrollView.contentSize.width, FCProgressHeight)];
+        progressView.itemFrames = self.frames;
+        progressView.color = _selectedColor.CGColor;
+        progressView.backgroundColor = [UIColor clearColor];
+        [self.scrollView addSubview:progressView];
+        progressView;
+    });
 }
 
 - (void)didPressedMenuItem:(FCMenuItem *)menuItem {
     
     if (self.selectedItem == menuItem) return;
     NSInteger currentIndex = self.selectedItem.tag - kFCTagGap;
+    
+    CGFloat progress = menuItem.tag - kFCTagGap;
+    self.progressView.progress = progress;
+    
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedIndex:currentIndex:)]) {
         [self.delegate menuView:self didSelectedIndex:(menuItem.tag - kFCTagGap) currentIndex:currentIndex];
     }
@@ -158,14 +186,21 @@
 
 - (void)slideMenuAtProgress:(CGFloat)progress {
     
+    if (self.style == FCMenuViewStyleLine) {
+        self.progressView.progress = progress;
+    }
+    
     NSInteger tag = (NSInteger)progress + kFCTagGap;
     CGFloat rate = progress - tag + kFCTagGap;
+    
     FCMenuItem *currentItem = (FCMenuItem *)[self viewWithTag:tag];
     FCMenuItem *nextItem = (FCMenuItem *)[self viewWithTag:tag+1];
     if (rate == 0.0) {
         rate = 1.0;
+        self.selectedItem.rate = 0.f;
         [self.selectedItem deselectedItemWithoutAnimation];
         self.selectedItem = currentItem;
+        self.selectedItem.rate = 1.f;
         [self.selectedItem selectedItemWithoutAnimation];
         [self refreshContentOffset];
         return;
@@ -174,4 +209,13 @@
     nextItem.rate = rate;
 }
 
+#pragma mark - Getter Methods
+- (NSMutableArray *)frames {
+    
+    if (!_frames) {
+        
+        _frames = [NSMutableArray array];
+    }
+    return _frames;
+}
 @end

@@ -10,6 +10,12 @@
 
 @class FCMenuView;
 
+typedef NS_ENUM(NSUInteger, FCMenuViewStyle) {
+    
+    FCMenuViewStyleDefault,
+    FCMenuViewStyleLine
+};
+
 @protocol FCMenuViewDelegate <NSObject>
 
 @optional
@@ -37,6 +43,8 @@
  This delegate conforms to the 'FCMenuViewDelegate' protocol of the menuView.
  */
 @property(nonatomic, weak) id <FCMenuViewDelegate> delegate;
+
+@property(nonatomic, assign) FCMenuViewStyle style;
 
 /**
  This method is used to initialize a menu instance.

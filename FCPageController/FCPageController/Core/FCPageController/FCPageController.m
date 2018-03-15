@@ -114,6 +114,7 @@
                                                      normalColor:self.titleColorNormal
                                                    selectedColor:self.titleColorSelected];
         menuView.delegate = self;
+        menuView.style = self.menuViewStyle;
         [self.view addSubview:menuView];
         menuView;
     });
@@ -247,6 +248,9 @@
 
 - (CGFloat)menuView:(FCMenuView *)menuView widthForItemAtIndex:(NSInteger)index {
     
+    if (self.itemsWidths) {
+        return [self.itemsWidths[index] floatValue];
+    }
     return self.menuItemWidth;
 }
 

@@ -21,6 +21,7 @@
 		19DC971D2058C565003AD3B2 /* FCTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC971C2058C565003AD3B2 /* FCTwoViewController.m */; };
 		19DC97202058C56C003AD3B2 /* FCThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC971F2058C56C003AD3B2 /* FCThreeViewController.m */; };
 		19DC97232058C76C003AD3B2 /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC97222058C76C003AD3B2 /* FCViewController.m */; };
+		19DC9726205A0EA4003AD3B2 /* FCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC9725205A0EA4003AD3B2 /* FCProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		19DC971F2058C56C003AD3B2 /* FCThreeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCThreeViewController.m; sourceTree = "<group>"; };
 		19DC97212058C76C003AD3B2 /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
 		19DC97222058C76C003AD3B2 /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
+		19DC9724205A0EA4003AD3B2 /* FCProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCProgressView.h; sourceTree = "<group>"; };
+		19DC9725205A0EA4003AD3B2 /* FCProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				19DC970D2058B9EA003AD3B2 /* FCMenuView.m */,
 				19DC970F2058B9F2003AD3B2 /* FCMenuItem.h */,
 				19DC97102058B9F2003AD3B2 /* FCMenuItem.m */,
+				19DC9724205A0EA4003AD3B2 /* FCProgressView.h */,
+				19DC9725205A0EA4003AD3B2 /* FCProgressView.m */,
 			);
 			path = FCMenuView;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				19DC97002058B827003AD3B2 /* main.m in Sources */,
 				19DC971A2058C559003AD3B2 /* FCOneViewController.m in Sources */,
 				19DC97202058C56C003AD3B2 /* FCThreeViewController.m in Sources */,
+				19DC9726205A0EA4003AD3B2 /* FCProgressView.m in Sources */,
 				19DC971D2058C565003AD3B2 /* FCTwoViewController.m in Sources */,
 				19DC96F22058B827003AD3B2 /* AppDelegate.m in Sources */,
 				19DC970A2058B9BB003AD3B2 /* FCPageController.m in Sources */,

@@ -27,6 +27,8 @@
     FCPageController *pageVC = [[FCPageController alloc] initWithViewControllerClasses:@[[FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class], [FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class], [FCOneViewController class], [FCTwoViewController class], [FCThreeViewController class]] andThierTitles:@[@"One", @"Two", @"Three", @"One", @"Two", @"Three", @"One", @"Two", @"Three"]];
     pageVC.menuItemWidth = 80;
     pageVC.pageAnimatable = YES;
+    pageVC.menuViewStyle = FCMenuViewStyleLine;
+    pageVC.itemsWidths = @[@(150),@(100),@(80),@(90),@(180),@(150),@(100),@(80),@(90)];
     
     self.window.rootViewController = pageVC;
     [self.window makeKeyAndVisible];

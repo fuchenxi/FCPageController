@@ -10,7 +10,7 @@
 
 #define kFCSelectedSize 18
 #define kFCNormolSize   15
-#define kFCAnimateStep  0.2
+#define kFCAnimateStep  0.05
 #define kFCAnimateRate  0.1
 
 #define kFCBGColor        [UIColor whiteColor]
@@ -31,6 +31,7 @@
 
 @implementation FCMenuItem
 
+#pragma mark - Contorl Item's status
 - (void)selectedItemWithoutAnimation {
     
     self.titleColor = self.selectedColor;
@@ -49,7 +50,7 @@
     [self setNeedsDisplay];
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     if ([self.delegate respondsToSelector:@selector(didPressedMenuItem:)]) {
         
@@ -83,26 +84,27 @@
     [self updateFontAndRGBA];
 }
 
-- (void)setTitle:(NSString *)title{
+- (void)setTitle:(NSString *)title {
+    
     _title = title;
-    
     [self setNeedsDisplay];
 }
 
-- (void)setFont:(UIFont *)font{
+- (void)setFont:(UIFont *)font {
+    
     _font = font;
-    
     [self setNeedsDisplay];
 }
 
-- (void)setTitleColor:(UIColor *)titleColor{
-    _titleColor = titleColor;
+- (void)setTitleColor:(UIColor *)titleColor {
     
+    _titleColor = titleColor;
     [self setNeedsDisplay];
 }
 
 #pragma mark - Getter Mehtods
 - (CGFloat)normalSize {
+    
     if (!_normalSize) {
     
         _normalSize = kFCNormolSize;
@@ -127,6 +129,7 @@
     }
     return _sizeGap;
 }
+
 - (UIColor *)selectedColor {
     
     if (!_selectedColor) {
@@ -135,6 +138,7 @@
     }
     return _selectedColor;
 }
+
 - (UIColor *)normalColor {
     
     if (!_normalColor) {
@@ -185,6 +189,7 @@
     }
 }
 
+#pragma mark - RGBA Mehtods
 - (void)setRGBA {
     
     int numNormal = (int)CGColorGetNumberOfComponents(self.normalColor.CGColor);
@@ -220,6 +225,12 @@
     
     self.titleColor = [UIColor colorWithRed:r green:g blue:b alpha:a];
     self.font = [UIFont systemFontOfSize:fontSize];
+}
+
+- (void)dealloc {
+    
+    [self.link invalidate];
+    self.link = nil;
 }
 
 @end
