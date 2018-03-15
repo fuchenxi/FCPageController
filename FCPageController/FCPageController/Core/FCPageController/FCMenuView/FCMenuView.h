@@ -66,6 +66,14 @@ typedef NS_ENUM(NSUInteger, FCMenuViewStyle) {
                   normalColor:(UIColor *)normalColor
                 selectedColor:(UIColor *)selectedColor;
 
+
+/**
+ To select item at index.
+
+ @param index index
+ */
+- (void)selectItemAtIndex:(NSInteger)index;
+
 /**
  The scrolling progress of the menu view.
 

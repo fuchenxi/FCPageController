@@ -81,6 +81,9 @@
     [self calculateSize];
     [self configureScrollView];
     [self configureMenuView];
+    if (self.selectIndex != 0) {
+        [self.menuView selectItemAtIndex:self.selectIndex];
+    }
 }
 
 #pragma mark - Configure
@@ -198,6 +201,15 @@
     }
 }
 
+#pragma mark - Setter Methods
+- (void)setSelectIndex:(int)selectIndex {
+    
+    _selectIndex = selectIndex;
+    if (self.menuView) {
+        [self.menuView selectItemAtIndex:selectIndex];
+    }
+}
+
 #pragma mark - Lazy Loading Methods
 - (NSMutableArray *)childViewFrames {
     
@@ -236,6 +248,11 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
     _animate = YES;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    _selectIndex = (NSInteger)scrollView.contentOffset.x / _viewWidth;
 }
 
 #pragma mark - Menu View Delegate

@@ -22,7 +22,7 @@
     if (fabs(progress - _progress) >= 0.94 && fabs(progress - _progress) < 1.2) {
         
         _gap = fabs(self.progress - progress);
-        _sign = self.progress>progress?-1:1;
+        _sign = self.progress > progress ? -1 : 1;
         _step = _gap / 20.0;
         _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(progressChanged)];
         [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
@@ -46,21 +46,26 @@
         _link = nil;
     }
 }
+
 - (void)drawRect:(CGRect)rect {
     
     // Drawing code
     [super drawRect:rect];
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     int index = (int)self.progress;
+    
     CGFloat rate = self.progress - index;
     CGRect currentFrame = [self.itemFrames[index] CGRectValue];
     CGFloat currentWidth = currentFrame.size.width;
-    int nextIndex = index+1<self.itemFrames.count ? index+1:index;
+    
+    int nextIndex = index + 1 < self.itemFrames.count ? index + 1 : index;
+    
     CGFloat nextWidth = [self.itemFrames[nextIndex] CGRectValue].size.width;
     CGFloat height = self.frame.size.height;
-    CGFloat constY = height/2;
+    CGFloat constY = height / 2;
     CGFloat startX = currentFrame.origin.x + currentWidth * rate;
     CGFloat endX = startX + currentWidth + (nextWidth - currentWidth)*rate;
+    
     CGContextMoveToPoint(ctx, startX, constY);
     CGContextAddLineToPoint(ctx, endX, constY);
     CGContextSetLineWidth(ctx, height);

@@ -27,9 +27,9 @@
 @property(nonatomic, strong) UIViewController *currentViewController;
 
 /**
- The current selection of the controller's index.
+ To select child controller at index.
  */
-@property(nonatomic, assign) int selectedIndex;
+@property(nonatomic, assign) int selectIndex;
 
 /**
  default NO. if YES, stop on multiples of view bounds

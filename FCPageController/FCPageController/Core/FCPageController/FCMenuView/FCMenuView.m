@@ -64,9 +64,9 @@ static CGFloat const FCProgressHeight = 2.0;
     return self;
 }
 
-- (void)willMoveToWindow:(UIWindow *)newWindow {
+- (void)willMoveToSuperview:(UIView *)newSuperview {
     
-    [super willMoveToWindow:newWindow];
+    [super willMoveToSuperview:newSuperview];
     [self configureScrollView];
     [self configureItems];
     if (self.style == FCMenuViewStyleLine) {
@@ -207,6 +207,21 @@ static CGFloat const FCProgressHeight = 2.0;
     }
     currentItem.rate = 1-rate;
     nextItem.rate = rate;
+}
+
+- (void)selectItemAtIndex:(NSInteger)index {
+
+    NSInteger tag = index + kFCTagGap;
+    NSInteger currentIndex = self.selectedItem.tag - kFCTagGap;
+    FCMenuItem *item = (FCMenuItem *)[self viewWithTag:tag];
+    [self.selectedItem deselectedItemWithoutAnimation];
+    self.selectedItem = item;
+    [self.selectedItem selectedItemWithoutAnimation];
+    self.progressView.progress = index;
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedIndex:currentIndex:)]) {
+        [self.delegate menuView:self didSelectedIndex:index currentIndex:currentIndex];
+    }
+    [self refreshContentOffset];
 }
 
 #pragma mark - Getter Methods
