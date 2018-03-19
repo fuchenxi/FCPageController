@@ -40,6 +40,22 @@
 
 @implementation FCPageController
 
+#pragma mark - Public Methods
+- (void)setSelectIndex:(int)selectIndex {
+    
+    _selectIndex = selectIndex;
+    if (self.menuView) {
+        [self.menuView selectItemAtIndex:selectIndex];
+    }
+}
+
+- (void)setItemsWidths:(NSArray *)itemsWidths {
+    
+    if (itemsWidths.count != self.titles.count) return;
+    _itemsWidths = itemsWidths;
+    
+}
+
 #pragma mark - Init Method
 - (instancetype)initWithViewControllerClasses:(NSArray *)classes andThierTitles:(NSArray *)titles {
     
@@ -78,12 +94,18 @@
     
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self calculateSize];
     [self configureScrollView];
     [self configureMenuView];
-    if (self.selectIndex != 0) {
-        [self.menuView selectItemAtIndex:self.selectIndex];
-    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [self addViewControllerAtIndex:0];
+    [self postFullyDisplayedNotificationWithCurrentIndex:self.selectIndex];
 }
 
 #pragma mark - Configure
@@ -91,8 +113,7 @@
     
     self.scrollView = ({
         
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.menuHeight, _viewWidth, _viewHeight)];
-        scrollView.contentSize = CGSizeMake(self.viewControllerClasses.count * _viewWidth, _viewHeight);
+        UIScrollView *scrollView = [[UIScrollView alloc] init];
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.pagingEnabled = YES;
@@ -102,7 +123,6 @@
         [self.view addSubview:scrollView];
         scrollView;
     });
-    [self addViewControllerAtIndex:0];
 }
 
 - (void)configureMenuView {
@@ -121,8 +141,12 @@
         [self.view addSubview:menuView];
         menuView;
     });
+    if (self.selectIndex != 0) {
+        [self.menuView selectItemAtIndex:self.selectIndex];
+    }
 }
 
+#pragma mark -
 #pragma mark - Private Methods
 - (void)addViewControllerAtIndex:(int)index {
     
@@ -135,18 +159,31 @@
     [self.scrollView addSubview:vc.view];
     self.currentViewController = vc;
     [self.displayVC setObject:vc forKey:@(index)];
+    
+    [self postFinishInitNotificationWithIndex:index];
+}
+
+// 移除控制器，且从display中移除
+- (void)removeViewController:(UIViewController *)viewController atIndex:(NSInteger)index{
+    
+    [viewController.view removeFromSuperview];
+    [viewController willMoveToParentViewController:nil];
+    [viewController removeFromParentViewController];
+    
+    [self.displayVC removeObjectForKey:@(index)];
 }
 
 - (void)calculateSize {
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    if (self.navigationController) {
-        
-        _viewHeight = self.view.frame.size.height - self.menuHeight - 64;
-    } else {
-        _viewHeight = self.view.frame.size.height - self.menuHeight - 0;
-    }
+    _viewHeight = self.view.frame.size.height - self.menuHeight;
     _viewWidth = CGRectGetWidth(self.view.frame);
+    
+    _childViewFrames = [NSMutableArray array];
+    for (int i = 0; i < self.viewControllerClasses.count; i++) {
+        
+        CGRect frame = CGRectMake(i * _viewWidth, 0, _viewWidth, _viewHeight);
+        [_childViewFrames addObject:[NSValue valueWithCGRect:frame]];
+    }
 }
 
 - (BOOL)isInScreen:(CGRect)frame {
@@ -159,6 +196,33 @@
     } else {
         return NO;
     }
+}
+
+- (void)resetMenuView {
+    
+    FCMenuView *oldMenuView = self.menuView;
+    [self configureMenuView];
+    [oldMenuView removeFromSuperview];
+}
+
+- (void)viewDidLayoutSubviews{
+    
+    [super viewDidLayoutSubviews];
+    
+    // 第一次 或者 屏幕状态改变？
+    // 计算宽高及子控制器的视图frame
+    [self calculateSize];
+    
+    CGRect scrollFrame = CGRectMake(0, self.menuHeight, _viewWidth, _viewHeight);
+    
+    self.scrollView.frame = scrollFrame;
+    self.scrollView.contentSize = CGSizeMake(self.titles.count * _viewWidth, _viewHeight);
+    [self.scrollView setContentOffset:CGPointMake(self.selectIndex * _viewWidth, 0)];
+    self.currentViewController.view.frame = [self.childViewFrames[self.selectIndex] CGRectValue];
+    
+    [self resetMenuView];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)layoutChildViewControllers {
@@ -201,30 +265,7 @@
     }
 }
 
-#pragma mark - Setter Methods
-- (void)setSelectIndex:(int)selectIndex {
-    
-    _selectIndex = selectIndex;
-    if (self.menuView) {
-        [self.menuView selectItemAtIndex:selectIndex];
-    }
-}
-
 #pragma mark - Lazy Loading Methods
-- (NSMutableArray *)childViewFrames {
-    
-    if (!_childViewFrames) {
-        
-        _childViewFrames = [NSMutableArray array];
-        for (int i = 0; i < self.viewControllerClasses.count; i++) {
-            
-            CGRect frame = CGRectMake(i * _viewWidth, 0, _viewWidth, _viewHeight);
-            [_childViewFrames addObject:[NSValue valueWithCGRect:frame]];
-        }
-    }
-    return _childViewFrames;
-}
-
 - (NSMutableDictionary *)displayVC {
     
     if (!_displayVC) {
@@ -233,6 +274,29 @@
     }
     return _displayVC;
 }
+
+#pragma mark - Notification Mehtods
+- (void)postFinishInitNotificationWithIndex:(NSInteger)index {
+    
+    if (!self.postNotification) return;
+    NSDictionary *info = @{
+                           @"index" : @(index),
+                           @"title" : self.titles[index]
+                           };
+    [[NSNotificationCenter defaultCenter] postNotificationName:FCControllerDidFullyDisplayedNotification object:info];
+}
+
+- (void)postFullyDisplayedNotificationWithCurrentIndex:(int)index {
+    
+    if (!self.postNotification) return;
+    NSDictionary *info = @{
+                           @"index":@(index),
+                           @"title":self.titles[index]
+                           };
+    [[NSNotificationCenter defaultCenter] postNotificationName:FCControllerDidFullyDisplayedNotification
+                                                        object:info];
+}
+
 
 #pragma mark - ScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -253,6 +317,12 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     _selectIndex = (NSInteger)scrollView.contentOffset.x / _viewWidth;
+    [self postFullyDisplayedNotificationWithCurrentIndex:self.selectIndex];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    
+    [self postFullyDisplayedNotificationWithCurrentIndex:self.selectIndex];
 }
 
 #pragma mark - Menu View Delegate
@@ -261,6 +331,14 @@
     NSInteger gap = (NSInteger)labs(index - currentIndex);
     _animate = NO;
     [self.scrollView setContentOffset:CGPointMake(_viewWidth * index, 0) animated:gap > 1 ? NO : self.pageAnimatable];
+    if (gap > 1 || !self.pageAnimatable) {
+        [self postFullyDisplayedNotificationWithCurrentIndex:(int)index];
+        // 由于不触发-scrollViewDidScroll: 手动清除控制器..
+        UIViewController *vc = [self.displayVC objectForKey:@(currentIndex)];
+        if (vc) {
+            [self removeViewController:vc atIndex:currentIndex];
+        }
+    }
 }
 
 - (CGFloat)menuView:(FCMenuView *)menuView widthForItemAtIndex:(NSInteger)index {

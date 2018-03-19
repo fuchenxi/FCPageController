@@ -30,7 +30,7 @@
     pageVC.pageAnimatable = YES;
     pageVC.menuViewStyle = FCMenuViewStyleLine;
     pageVC.itemsWidths = @[@(150),@(100),@(80),@(90),@(180),@(150),@(100),@(80),@(90)];
-    pageVC.selectIndex = 2;
+    pageVC.selectIndex = 5;
     self.window.rootViewController = pageVC;
     [self.window makeKeyAndVisible];
     return YES;

@@ -44,6 +44,11 @@ typedef NS_ENUM(NSUInteger, FCMenuViewStyle) {
  */
 @property(nonatomic, weak) id <FCMenuViewDelegate> delegate;
 
+/**
+ The color of the line.
+ */
+@property(nonatomic, strong) UIColor *lineColor;
+
 @property(nonatomic, assign) FCMenuViewStyle style;
 
 /**

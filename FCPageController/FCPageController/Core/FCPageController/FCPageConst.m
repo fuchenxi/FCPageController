@@ -6,6 +6,8 @@
 //  Copyright © 2018年 fuchenxi. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 //  标题的尺寸(选中/非选中)
 #define kFCTitleSizeSelected 18
 #define kFCTitleSizeNormal   15
@@ -20,4 +22,9 @@
 #define kFCMenuHeight  44
 //  导航菜单栏每个item的宽度
 #define kFCMenuItemWidth 65
+
+
+static NSString *const FCControllerDidFinishInitNotification = @"FCControllerDidFinishInitNotification";
+
+static NSString *const FCControllerDidFullyDisplayedNotification = @"FCControllerDidFullyDisplayedNotification";
 

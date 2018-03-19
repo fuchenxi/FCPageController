@@ -82,6 +82,16 @@
 @property (nonatomic, assign) FCMenuViewStyle menuViewStyle;
 
 /**
+ The color of the line.
+ */
+@property(nonatomic, strong) UIColor *lineColor;
+
+/**
+ Whether notify observer when finish init or fully displayed to user, the default is NO.
+ */
+@property (nonatomic, assign) BOOL postNotification;
+
+/**
  Initialize a pageController instance with the classes of the child controller and their title.
 
  @param classes Classes of the child controllers.
